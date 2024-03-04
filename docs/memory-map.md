@@ -21,10 +21,9 @@
 
 ### Terminals F50-F5F
 
-#### Terminal (or multiple)
-+ **F50** - Read/Write
+#### UART (or multiple)
++ **F50** - Data register
 + **F51** - CR
-+ **F52** - Status register
 
 ### System devices 
 

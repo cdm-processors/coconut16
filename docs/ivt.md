@@ -22,4 +22,8 @@
 |        11        |      44      |             Timer interrupt             |
 |        12        |      48      |                Reserved                 |
 |        13        |      4С      |                Reserved                 |
+|        14        |      50      |          UART 0 data interrupt          |
+|        15        |      54      |                Reserved                 |
+|        16        |      58      |                Reserved                 |
+|        17        |      5С      |                Reserved                 |
 |   ... <br> 3F    | ... <br> FC  | External interrupts <br> and exceptions |
