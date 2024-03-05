@@ -45,3 +45,14 @@
 + **F7C** - Exception
 + **F7E** - Context
 + **F80-FFF** - Table
+
+#### MMU Table 
++ **F80-FBF** - Flags
++ **Flags** - PWIR RRRR LLLL LLLL
+    + **P** - Presence
+    + **W** - Write protect
+    + **I** - Inverse
+    + **R** - Reserved
+    + **L** - Length
+
++ **FC0-FFF** - Offsets
