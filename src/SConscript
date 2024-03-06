@@ -1,0 +1,3 @@
+bootloader = Library('bootloader', Glob('bootloader/*.asm'))
+
+Program('bootloader', bootloader + ["devices.asm"])
