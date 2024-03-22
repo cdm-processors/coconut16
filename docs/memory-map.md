@@ -28,7 +28,7 @@
 ### System devices 
 
 #### Timer
-+ **F60** - CR
++ **F58** - CR
 
 #### RTC
 + **F66** - CR
