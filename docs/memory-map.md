@@ -8,8 +8,9 @@
 + **FF000-FFFFF** - Device area
 
 ### 0-th context mapping
-+ FE000-FEFFF - ROM
-+ FD000-FDFFF - RAM
++ 0000-0FFF -> FE000-FEFFF - ROM
++ 0000-0FFF -> FD000-FDFFF - RAM
++ E000-EFFF -> 00000-000FF - RAM to global IVT
 
 
 ## Device area: 000-FFF
