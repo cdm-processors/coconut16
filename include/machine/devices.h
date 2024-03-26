@@ -6,21 +6,23 @@
 #include <machine/mmu.h>
 #include <machine/dma.h>
 
-extern volatile u16 STATUS_DISP;
+#include <compiler.h>
 
-extern volatile u8  UART0_DATA;
-extern volatile u8  UART0_CNTR;
+extern __io u16 STATUS_DISP;
 
-extern volatile u16 TIMER_CNTR;
+extern __io u8  UART0_DATA;
+extern __io u8  UART0_CNTR;
 
-extern volatile u16 DMA_RAM_ADDR;
-extern volatile u16 DMA_SECT_NUM;
-extern volatile u16 DMA_CNTR;
+extern __io u16 TIMER_CNTR;
 
-extern volatile u16 MMU_EXC_REG;
-extern volatile u16 MMU_CTX_REG;
+extern __io u16 DMA_RAM_ADDR;
+extern __io u16 DMA_SECT_NUM;
+extern __io u16 DMA_CNTR;
 
-extern volatile mmu_table_t MMU_TABLE;
+extern __io u16 MMU_EXC_REG;
+extern __io u16 MMU_CTX_REG;
+
+extern __io mmu_table_t MMU_TABLE;
 
 
 #endif /* _MACHINE_DEVICES_H_ */
