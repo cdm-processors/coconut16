@@ -4,3 +4,12 @@ build/
 # Logisim libraries
 logisim/libs/*
 !logisim/libs/.gitkeep
+
+# SCons
+.sconsign.dblite
+
+# VS Code
+.vscode/
+
+# JetBrains IDEs
+.idea/
