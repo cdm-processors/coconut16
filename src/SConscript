@@ -1,3 +1,8 @@
-bootloader = Library('bootloader', Glob('bootloader/*.asm'))
+Import('env')
 
-Program('bootloader', bootloader + ["devices.asm"])
+machine_lib = SConscript('./machine/SConscript', exports='env')
+bootloader_lib = SConscript('./bootloader/SConscript', exports='env')
+loader_lib = SConscript('./loader/SConscript', exports='env')
+
+env.Program('bootloader', bootloader_lib + machine_lib)
+env.Program('loader', loader_lib + machine_lib)

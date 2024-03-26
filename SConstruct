@@ -1,21 +1,64 @@
 import os
 
-env = DefaultEnvironment(
+from pathlib import Path
+
+assembly_file_action = Action(
+    '$CC -target $CLANG_ARCH $CCFLAGS $CPPFLAGS $_CPPDEFFLAGS $_CPPINCFLAGS -o $TARGET -S $SOURCES',
+    # 'C to ASM: $TARGET'
+)
+
+assembly_file_builder = Builder(
+    action=assembly_file_action,
+    suffix='.s',
+    src_suffix='.c',
+    single_source = True
+)
+
+env = DefaultEnvironment(    
     ENV={
-        'PATH': os.environ['PATH']
+        'PATH': os.environ['PATH'],
     },
+
+    BUILDERS={
+        'AssemblyFile': assembly_file_builder
+    },
+
+    CDM_LLVM_PATH=Path(os.environ['CDM_LLVM_PATH']).as_posix(),
+
+    COMPILATIONDB_USE_ABSPATH=True,
+
+    COCAS_ARCH='cdm16e',
+    CLANG_ARCH='cdm',
     
     AS='cocas',
-    ASCOM='$AS $ASFLAGS -c -o $TARGET $SOURCES',
+    ASCOM='$AS -t $COCAS_ARCH $ASFLAGS -o $TARGET -c $SOURCES',
     ASFLAGS='',
+    # ASCOMSTR = "Assembling $TARGET",
 
     LINK='$AS',
-    LINKCOM='$LINK $LINKFLAGS -o $TARGET $SOURCES',
+    LINKCOM='$LINK -t $COCAS_ARCH $LINKFLAGS -o $TARGET $SOURCES',
     LINKFLAGS='',
+    # LINKCOMSTR = "Linking $TARGET",
 
     AR='$AS',
-    ARCOM='$AR $ARFLAGS -o $TARGET -m $SOURCES',
+    ARCOM='$AR -t $COCAS_ARCH $ARFLAGS -o $TARGET -m $SOURCES',
     ARFLAGS='',
+    # ARCOMSTR = "Making static library $TARGET",
+
+    CC='$CDM_LLVM_PATH/clang',
+    CCCOM='$CC -target $CLANG_ARCH $CCFLAGS $CPPFLAGS $_CPPDEFFLAGS $_CPPINCFLAGS -o $TARGET -c $SOURCES',
+    CCFLAGS='-O3 -Wall',
+    CPPFLAGS='',
+    # -mllvm -inline-threshold=16 -mllvm -unroll-threshold=16
+
+    CPPPATH=['#/include'],
+    CPPDEFINES=[],
+
+    CPPDEFPREFIX='-D',
+    CPPDEFSUFFIX='',
+
+    INCPREFIX='-I',
+    INCSUFFIX='',
 
     PROGPREFIX='',
     PROGSUFFIX='.img',
@@ -27,4 +70,7 @@ env = DefaultEnvironment(
     OBJSUFFIX='.obj'
     )
 
-SConscript('src/SConscript', variant_dir='build', duplicate=False)
+# env.Tool('compilation_db')
+# env.CompilationDatabase('./build/compile_commands.json')
+
+SConscript('src/SConscript', variant_dir='build', duplicate=False, exports='env')
