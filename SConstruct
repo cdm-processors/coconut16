@@ -23,14 +23,15 @@ env = DefaultEnvironment(
         'AssemblyFile': assembly_file_builder
     },
 
-    CDM_LLVM_PATH=Path(os.environ['CDM_LLVM_PATH']).as_posix(),
+    CDM_COCAS_PATH=os.getenv('CDM_COCAS_PATH', 'cocas'),
+    CDM_CLANG_PATH=os.getenv('CDM_CLANG_PATH', 'clang'),
 
     COMPILATIONDB_USE_ABSPATH=True,
 
     COCAS_ARCH='cdm16e',
     CLANG_ARCH='cdm',
     
-    AS='cocas',
+    AS='$CDM_COCAS_PATH',
     ASCOM='$AS -t $COCAS_ARCH $ASFLAGS -o $TARGET -c $SOURCES',
     ASFLAGS='',
     # ASCOMSTR = "Assembling $TARGET",
@@ -45,7 +46,7 @@ env = DefaultEnvironment(
     ARFLAGS='',
     # ARCOMSTR = "Making static library $TARGET",
 
-    CC='$CDM_LLVM_PATH/clang',
+    CC='$CDM_CLANG_PATH',
     CCCOM='$CC -target $CLANG_ARCH $CCFLAGS $CPPFLAGS $_CPPDEFFLAGS $_CPPINCFLAGS -o $TARGET -c $SOURCES',
     CCFLAGS='-O3 -Wall',
     CPPFLAGS='',
