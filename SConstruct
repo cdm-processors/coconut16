@@ -55,6 +55,10 @@ env = DefaultEnvironment(
     ARFLAGS='$DEBUG',
     # ARCOMSTR = "Making static library $TARGET",
 
+    RANLIB='',
+    RANLIBCOM='',
+    RANLIBFLAGS='',
+
     CC='$CDM_CLANG_PATH',
     CCCOM='$CC -target $CLANG_ARCH $CCFLAGS $CPPFLAGS $_CPPDEFFLAGS $_CPPINCFLAGS -o $TARGET -c $SOURCES',
     CCFLAGS='-O3 -Wall',
@@ -84,3 +88,4 @@ env = DefaultEnvironment(
 # env.CompilationDatabase('./build/compile_commands.json')
 
 SConscript('src/SConscript', variant_dir='build', duplicate=False, exports='env')
+# print(env.Dump())
