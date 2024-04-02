@@ -4,7 +4,9 @@
 #include <machine/types.h>
 
 typedef i16     ptrdiff_t;
+#ifndef __cplusplus
 typedef u16     wchar_t;
+#endif /* !__cplusplus */
 typedef usize   size_t;
 
 #define NULL    ((void*)0)
