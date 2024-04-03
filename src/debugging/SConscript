@@ -1,8 +1,8 @@
 Import('env')
 
-asm_files = Glob('*.asm') + Glob('../bootloader/*.asm', exclude=['../bootloader/bootloader.asm', '../bootloader/ivt.asm'])
+asm_files = Glob('*.asm') + ['../bootloader/panic.asm', '../bootloader/ascii.asm', '../bootloader/uart.asm']
 
-c_files = Glob('*.c') + Glob('../bootloader/*.c', exclude=['../bootloader/bootloader_c.c'])
+c_files = Glob('*.c') + ['../bootloader/panic_c.c', '../bootloader/ascii_c.c']
 asm_c_files = env.AssemblyFile(c_files)
 
 library = env.Library('debugging', asm_files + asm_c_files)

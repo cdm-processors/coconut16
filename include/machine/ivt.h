@@ -2,6 +2,7 @@
 #define _MACHINE_IVT_H_
 
 #include <machine/status.h>
+#include <compiler.h>
 
 #define IVT_ENTRIES 64
 
@@ -20,7 +21,7 @@
 #define IVT_TIMER_INTERRUPT         0x11
 #define IVT_UART0_INTERRUPT         0x14
 
-typedef void (*isr_t)();
+typedef __isr void (*isr_t)();
 
 typedef struct ivt_entry_s {
     isr_t handler;

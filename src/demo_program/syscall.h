@@ -1,0 +1,1 @@
+void send_bytes_to_uart_sc(char* bytes, int count);

@@ -69,4 +69,8 @@ __ldssp>
     ldssp r0
     rts
 
+__syscall>
+    syscall
+    rts
+
 end.

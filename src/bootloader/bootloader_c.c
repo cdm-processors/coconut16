@@ -3,6 +3,7 @@
 #include <machine/ivt.h>
 #include <machine/types.h>
 #include <machine/zero_context.h>
+#include <compiler.h>
 #include "memory_util.h"
 
 // + Setup stack (done in assembly)
@@ -12,10 +13,10 @@
 // 	(For now, just load first sector)
 // + Jump to boot image code
 
-void panic_handler();
-void timer_handler();
-void syscall_handler();
-void dma_handler();
+__isr void panic_handler();
+__isr void timer_handler();
+__isr void syscall_handler();
+__isr void dma_handler();
 
 void __bootloader_start_c() {
     __ei();
