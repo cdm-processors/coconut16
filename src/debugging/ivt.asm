@@ -3,7 +3,7 @@ panic_handler: ext
 start: ext
 
 # Bootloader interrupt vector table
-dc start            ,0x2000  # 00. Startup/Reset vector
+dc start        ,   0x2000  # 00. Startup/Reset vector
 dc panic_handler,   0x2000  # 01. Unaligned SP
 dc panic_handler,   0x2000  # 02. Unaligned PC
 dc panic_handler,   0x2000  # 03. Invalid instruction

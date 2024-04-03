@@ -8,8 +8,11 @@ __isr void syscall_handler(u16 r0, u16 r1, u16 r2, u16 r3) {
     case 0:
         send_bytes_to_uart((char *) r1, r2);
         break;
-    // case 1:
-    //     break;
+    case 1: {
+        int *ptr = (int *)r3;
+        *ptr = read_from_uart((char *) r1, r2);
+    }
+        break;
     default:
         panic_handler();
     }
