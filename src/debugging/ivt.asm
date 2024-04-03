@@ -1,9 +1,9 @@
 asect 0x0000
 panic_handler: ext
-debug_loader: ext
+start: ext
 
 # Bootloader interrupt vector table
-dc debug_loader,    0x2000  # 00. Startup/Reset vector
+dc start            ,0x2000  # 00. Startup/Reset vector
 dc panic_handler,   0x2000  # 01. Unaligned SP
 dc panic_handler,   0x2000  # 02. Unaligned PC
 dc panic_handler,   0x2000  # 03. Invalid instruction
@@ -74,13 +74,12 @@ dc panic_handler,   0x2000  # 3F. Reserved
 align 0x100
 
 
-rsect debug_loader
-debug_loader>
-    ldi r6, 0x666
-    STATUS_DISP: ext
-    ldi r0, STATUS_DISP
-    ldi r1, 0x1337
-    stw r0, r1
-    halt
+rsect start
+start>
+debug_loader: ext
+    ldi r0, 0xfe00
+	stsp r0
+
+    jsr debug_loader
 
 end.

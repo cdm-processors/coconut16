@@ -5,6 +5,9 @@ start>
 
 	ldi r0, 0x1000
 	stsp r0
+	ldpc r0
+	inc r0
+	stpc r0
 
 	jsr __bootloader_start_c
 	

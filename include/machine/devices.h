@@ -5,11 +5,13 @@
 
 #include <machine/mmu.h>
 #include <machine/dma.h>
+#include <machine/uart.h>
 
 #include <compiler.h>
 
 extern __io u16 STATUS_DISP;
 
+extern __io u16 UART0;
 extern __io u8  UART0_DATA;
 extern __io u8  UART0_CNTR;
 

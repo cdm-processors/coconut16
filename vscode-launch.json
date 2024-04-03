@@ -9,12 +9,13 @@
             "architecture": "vonNeumann",
             "target": "cdm16",
             "artifacts": {
-                "image": "${workspaceFolder}/build/debugging_.img",
-                "debug": "${workspaceFolder}/build/debugging_.dbg.json"
+                "image": "${workspaceFolder}/build/debugging.img",
+                "debug": "${workspaceFolder}/build/debugging.dbg.json"
             },
             "sources": [
                 "${workspaceFolder}/build/debugging/debugging_16.lib",
-                "${workspaceFolder}/build/machine/machine_16.lib"
+                "${workspaceFolder}/build/machine/machine_16.lib",
+                "${workspaceFolder}/build/demo_program/demo_program_16.lib"
             ]
         }
     ]
