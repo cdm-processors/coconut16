@@ -1,0 +1,21 @@
+{
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "name": "Debug CdM-16e with Von Neumann architecture",
+            "type": "cdm",
+            "request": "launch",
+            "address": "ws://localhost:7001",
+            "architecture": "vonNeumann",
+            "target": "cdm16",
+            "artifacts": {
+                "image": "${workspaceFolder}/build/debugging_.img",
+                "debug": "${workspaceFolder}/build/debugging_.dbg.json"
+            },
+            "sources": [
+                "${workspaceFolder}/build/debugging/debugging_16.lib",
+                "${workspaceFolder}/build/machine/machine_16.lib"
+            ]
+        }
+    ]
+}

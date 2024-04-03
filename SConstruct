@@ -33,7 +33,7 @@ env = DefaultEnvironment(
     
     AS='$CDM_COCAS_PATH',
     ASCOM='$AS -t $COCAS_ARCH $ASFLAGS -o $TARGET -c $SOURCES',
-    ASFLAGS='',
+    ASFLAGS='--debug',
     # ASCOMSTR = "Assembling $TARGET",
 
     LINK='$AS',
