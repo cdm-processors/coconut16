@@ -14,6 +14,9 @@ void send_bytes_to_uart(char* bytes, int count) {
 }
 
 int read_from_uart(char* buf, int max_count) {
+    if (!(UART0_CNTR & UART_CNTR_CON)) {
+        return -1;
+    }
     int count;
     i16 t;
     for (count = 0; count < max_count; count++) {

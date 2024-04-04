@@ -6,6 +6,9 @@ __noreturn int main() {
     char text[10];
     while (1) {
         int read = read_from_uart_sc(text, sizeof text);
+        if (read == -1) {
+            break;
+        }
         if (read) {
             send_bytes_to_uart_sc(text, read);
         }
