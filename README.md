@@ -78,3 +78,36 @@ Put following libraries in `logisim/libs/`:
     ```
 
     Fill in `compilerPath` with path to your system's `clang`, note that our proprietary `clang` may not work with it, so you need `clang` from official LLVM distrubution.
+
+### Debugging in VS Code
++ Install proprietary extension
+
++ Add following launch configuration to `launch.json`
+    ```json
+    {
+        "name": "Debug Coconut-16",
+        "type": "coconut",
+        "request": "launch",
+        "address": "ws://localhost:7001",
+        "target": "coconut16",
+        "debugInfos": {
+            "0": "${workspaceFolder}/build/bootloader.dbg.json",
+            "1": "${workspaceFolder}/build/loader.dbg.json"
+        }
+    }
+    ```
+
+### Running `SCons` before starting debug
++ Create new task in `tasks.json`
+    ```json
+    {
+        "label": "runScons",
+        "type": "shell",
+        "command": "scons"
+    }
+    ```
+
++ Add following property to launch configuration
+    ```json
+    "preLaunchTask": "runScons"
+    ```
