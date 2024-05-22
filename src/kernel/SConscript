@@ -2,5 +2,5 @@ Import('env')
 
 asm_files = Glob('*.asm')
 
-library = env.Library('loader', asm_files)
+library = env.Library('kernel', asm_files)
 Return('library')
