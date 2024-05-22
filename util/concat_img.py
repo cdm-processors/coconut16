@@ -3,7 +3,7 @@ import pathlib
 import itertools
 
 
-VIRT_ADDR_SPACE = 32768
+VIRT_ADDR_SPACE = 65536
 
 
 def read_img(file: pathlib.Path) -> bytearray:

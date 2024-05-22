@@ -20,7 +20,7 @@ void dma_handler();
 void __bootloader_start_c() {
     __ei();
 
-    dma_transfer(0x0100, 0x0000, DMA_READ | DMA_RUNNING);
+    dma_transfer(0x1000, 0x0000, DMA_READ | DMA_RUNNING);
 
     fill_global_ivt(panic_handler, PS_IO_HEADER | PS_CTX_NUM(0));
 
@@ -28,13 +28,14 @@ void __bootloader_start_c() {
     set_global_ivt(IVT_DMA_INTERRUPT, dma_handler, 0);
     set_global_ivt(IVT_SYSCALL, syscall_handler, PS_IO_HEADER | PS_CTX_NUM(0));
 
-    map_segment(1, 0, MMU_PRESENCE | MMU_SEG_LEN(0x200), 0x0100);
-    map_segment(1, 16, MMU_PRESENCE | MMU_SEG_LEN(0), 0x0200);
+    map_segment(1, 0, MMU_PRESENCE | MMU_SEG_LEN(0), 0x1000);
+    map_segment(1, 30, MMU_PRESENCE | MMU_SEG_LEN(0), 0x9e00);
 
     if (DMA_CNTR & DMA_RUNNING) 
         __wait();
 
     __di();
 
+    __stssp(0);
     __rti(0x0000, PS_IO_HEADER | PS_CTX_NUM(1));
 }

@@ -1,12 +1,10 @@
 asect 0
 STATUS_DISP: ext
+    kernel_start: ext
+    ldi r0, 0xf000
+    stsp r0
 
-kernel_start>
-
-    ldi r0, STATUS_DISP
-    ldi r1, 0xbeef
-    stw r0, r1
+    jsr kernel_start
 
     halt
-
 end.

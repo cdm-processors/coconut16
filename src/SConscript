@@ -5,5 +5,5 @@ bootloader_lib = SConscript('./bootloader/SConscript', exports='env')
 kernel_lib = SConscript('./kernel/SConscript', exports='env')
 
 boot = env.Program('bootloader', bootloader_lib + machine_lib)
-kern = env.Program('kernel', kernel_lib + machine_lib)
-env.Command('disk.img', [kern, boot], 'python util/concat_img.py $TARGET $SOURCES')
+kernel = env.Program('kernel', kernel_lib + machine_lib)
+env.Command('disk.img', [kernel], 'python util/concat_img.py $TARGET $SOURCES')
