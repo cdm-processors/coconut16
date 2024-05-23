@@ -13,6 +13,8 @@ rsect panic_handler
 __bootloader_panic_c: ext
 
 panic_handler>
+    ldi r0, 0x1000
+	stsp r0
     pushall
     ldsp r0
 

@@ -3,6 +3,7 @@
 #include <machine/ivt.h>
 
 #include "machine/intrinsic.h"
+#include "machine/status.h"
 #include "memory_util.h"
 
 void run_dma();
@@ -28,12 +29,20 @@ void kernel_main() {
     dma_current_task = 0;  // Compiler doesn't init global variables
     run_dma();
 
+    map_segment(2, 0, MMU_PRESENCE | MMU_SEG_LEN(0), 0x2000);
+    map_segment(2, 03, MMU_PRESENCE | MMU_SEG_LEN(0) | MMU_INVERSE, 0xaf00);
+
     while (dma_current_task != -1) {
         __wait();      
     }
-    // TIMER_CNTR = 0x2;
-    STATUS_DISP = 0xb33f;
-    STATUS_DISP = 0xb331;
-    STATUS_DISP = 0xb332;
-    STATUS_DISP = 0xd0Ae;
+
+
+    __di();
+
+    __stssp(0);
+    __rti(0x0000, PS_IO_HEADER | PS_CTX_NUM(2) | PS_INT_EN);
+    
+
+    // __stssp(0xf000);
+    // __rti(0x0000, PS_CTX_NUM(2) | PS_INT_EN | PS_IO_HEADER);
 }
