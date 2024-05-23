@@ -1,9 +1,8 @@
 #ifndef _MACHINE_INTRINSIC_H_
 #define _MACHINE_INTRINSIC_H_
 
-#include <machine/types.h>
-
 #include <compiler.h>
+#include <machine/types.h>
 
 /*
     Halts the processor.
@@ -11,8 +10,8 @@
 __privileged __noreturn void __halt();
 
 /*
-    Executes `wait` instruction causing 
-    processor to stop executing util 
+    Executes `wait` instruction causing
+    processor to stop executing util
     some interrupt comes.
 */
 __privileged void __wait();
@@ -28,8 +27,8 @@ __privileged void __ei();
 __privileged void __di();
 
 /*
-    Pushes values to stack and then 
-    executes `rti` instruction. 
+    Pushes values to stack and then
+    executes `rti` instruction.
 */
 __privileged __noreturn void __rti(u16 entry_point, u16 flags);
 

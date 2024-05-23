@@ -3,6 +3,8 @@
 #include <machine/ivt.h>
 #include <machine/types.h>
 #include <machine/zero_context.h>
+#include "machine/mmu.h"
+#include "machine/status.h"
 #include "memory_util.h"
 
 // + Setup stack (done in assembly)
@@ -29,13 +31,17 @@ void __bootloader_start_c() {
     set_global_ivt(IVT_SYSCALL, syscall_handler, PS_IO_HEADER | PS_CTX_NUM(0));
 
     map_segment(1, 0, MMU_PRESENCE | MMU_SEG_LEN(0), 0x1000);
-    map_segment(1, 30, MMU_PRESENCE | MMU_SEG_LEN(0), 0x9e00);
+    map_segment(1, 30, MMU_PRESENCE | MMU_SEG_LEN(0) | MMU_INVERSE, 0x9f00);
+
+    map_segment(1, 16, MMU_PRESENCE | MMU_SEG_LEN(0), 0); // IVT
 
     if (DMA_CNTR & DMA_RUNNING) 
         __wait();
 
+    
+
     __di();
 
     __stssp(0);
-    __rti(0x0000, PS_IO_HEADER | PS_CTX_NUM(1));
+    __rti(0x0000, PS_IO_HEADER | PS_CTX_NUM(1) | PS_INT_EN);
 }

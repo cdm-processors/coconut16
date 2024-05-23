@@ -1,0 +1,9 @@
+Import('env')
+
+asm_files = Glob('*.asm')
+
+c_files = Glob('*.c')
+asm_c_files = env.AssemblyFile(c_files)
+
+library = env.Library('user_echo', asm_files + asm_c_files)
+Return('library')
