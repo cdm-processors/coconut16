@@ -7,6 +7,7 @@
 #include "memory_util.h"
 
 void run_dma();
+__isr void syscall_handler();
 
 volatile int dma_current_task;
 
@@ -30,19 +31,16 @@ void kernel_main() {
     run_dma();
 
     map_segment(2, 0, MMU_PRESENCE | MMU_SEG_LEN(0), 0x2000);
-    map_segment(2, 03, MMU_PRESENCE | MMU_SEG_LEN(0) | MMU_INVERSE, 0xaf00);
+    map_segment(2, 30, MMU_PRESENCE | MMU_SEG_LEN(0) | MMU_INVERSE, 0xaf00);
+
+    set_global_ivt(IVT_SYSCALL, syscall_handler, PS_IO_HEADER | PS_CTX_NUM(1));
 
     while (dma_current_task != -1) {
         __wait();      
     }
-
-
+    
     __di();
 
-    __stssp(0);
-    __rti(0x0000, PS_IO_HEADER | PS_CTX_NUM(2) | PS_INT_EN);
-    
-
-    // __stssp(0xf000);
-    // __rti(0x0000, PS_CTX_NUM(2) | PS_INT_EN | PS_IO_HEADER);
+    __stssp(0xf000);
+    __rti(0x0000, PS_USER_MODE | PS_CTX_NUM(2) | PS_INT_EN);
 }
