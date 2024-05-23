@@ -4,6 +4,8 @@
 void panic_handler();
 
 __isr void syscall_handler(u16 r0, u16 r1, u16 r2, u16 r3) {
+    r1 = r1 - 0xe000 + 0x1000;
+    r3 = r3 - 0xe000 + 0x1000;
     switch (r0) {
     case 0:
         send_bytes_to_uart((char *) r1, r2);

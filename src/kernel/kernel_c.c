@@ -33,6 +33,8 @@ void kernel_main() {
     map_segment(2, 0, MMU_PRESENCE | MMU_SEG_LEN(0), 0x2000);
     map_segment(2, 30, MMU_PRESENCE | MMU_SEG_LEN(0) | MMU_INVERSE, 0xaf00);
 
+    map_segment(1, 17, MMU_PRESENCE | MMU_SEG_LEN(0) | MMU_INVERSE, 0xaf00);
+
     set_global_ivt(IVT_SYSCALL, syscall_handler, PS_IO_HEADER | PS_CTX_NUM(1));
 
     while (dma_current_task != -1) {
