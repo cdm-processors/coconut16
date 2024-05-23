@@ -88,4 +88,10 @@ __privileged u16 __ldssp();
 */
 __privileged void __stssp(u16 value);
 
+/*
+    Run syscall from user program with call number and optional arguments.
+*/
+void __syscall(int, ...);
+
+
 #endif /* _MACHINE_INTRINSIC_H_ */

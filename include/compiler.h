@@ -19,6 +19,7 @@
 #define __always_inline __attribute__((always_inline)) inline
 
 #define __no_caller_saved_registers    __attribute__((no_caller_saved_registers))
+#define __isr           __attribute__((CDM_ISR))
 
 #define __privileged
 

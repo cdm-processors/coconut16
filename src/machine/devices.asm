@@ -5,6 +5,7 @@ mend
 
 define_ext STATUS_DISP,     0xff40
 
+define_ext UART0,           0xff50
 define_ext UART0_DATA,      0xff50
 define_ext UART0_CNTR,      0xff51
 
