@@ -2,6 +2,8 @@ import os
 
 from pathlib import Path
 
+from SCons.Tool.compilation_db import __COMPILATION_DB_ENTRIES, __CompilationDbNode
+
 def debug_info_emitter(target, source, env):
     debug_file_name = Path(target[0].name).with_suffix('.dbg.json').as_posix()
     target.append(debug_file_name)
@@ -12,11 +14,36 @@ assembly_file_action = Action(
     # 'C to ASM: $TARGET'
 )
 
+def emit_compilation_db_entry(target, source, env):
+    """
+    This emitter adds C to assembly compilation
+    commands to database
+    """
+
+    dbtarget = __CompilationDbNode(source)
+
+    entry = env.__COMPILATIONDB_Entry(
+        target=dbtarget,
+        source=[],
+        __COMPILATIONDB_UOUTPUT=target,
+        __COMPILATIONDB_USOURCE=source,
+        __COMPILATIONDB_UACTION=assembly_file_action,
+        __COMPILATIONDB_ENV=env,
+    )
+
+    env.AlwaysBuild(entry)
+    env.NoCache(entry)
+
+    __COMPILATION_DB_ENTRIES.append(dbtarget)
+
+    return target, source
+
 assembly_file_builder = Builder(
     action=assembly_file_action,
     suffix='.s',
     src_suffix='.c',
-    single_source = True
+    single_source = True,
+    emitter=emit_compilation_db_entry,
 )
 
 env = DefaultEnvironment(    
@@ -80,7 +107,8 @@ env = DefaultEnvironment(
     OBJSUFFIX='.obj'
     )
 
-# env.Tool('compilation_db')
-# env.CompilationDatabase('./build/compile_commands.json')
+env.Tool('compilation_db')
+env['COMPILATIONDB_PATH_FILTER'] = '*.s'
+env.CompilationDatabase('./build/compile_commands.json')
 
 SConscript('src/SConscript', variant_dir='build', duplicate=False, exports='env')
