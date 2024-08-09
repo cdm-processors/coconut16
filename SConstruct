@@ -84,7 +84,7 @@ env = DefaultEnvironment(
 
     CC='$CDM_CLANG_PATH',
     CCCOM='$CC -target $CLANG_ARCH $CCFLAGS $CPPFLAGS $_CPPDEFFLAGS $_CPPINCFLAGS -o $TARGET -c $SOURCES',
-    CCFLAGS='-O3 -Wall',
+    CCFLAGS='-O3 -Wall -nostdinc',
     CPPFLAGS='',
     # -mllvm -inline-threshold=16 -mllvm -unroll-threshold=16
 

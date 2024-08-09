@@ -49,7 +49,8 @@ static void dma_transfer(u16 ram_addr, u16 sect_num, u16 flags) {
     DMA_CNTR = flags;
 }
 
-void __bootloader_start_c() {
+// NOLINTNEXTLINE(bugprone-reserved-identifier)
+__asm_call void __bootloader_start_c() {
     __ei();
 
     dma_transfer(0x0100, 0x0000, DMA_READ | DMA_RUNNING);
@@ -63,7 +64,7 @@ void __bootloader_start_c() {
     map_segment(1, 0, MMU_PRESENCE | MMU_SEG_LEN(0x200), 0x0100);
     map_segment(1, 16, MMU_PRESENCE | MMU_SEG_LEN(0), 0x0200);
 
-    if (DMA_CNTR & DMA_RUNNING) 
+    if (DMA_CNTR & DMA_RUNNING)
         __wait();
 
     __di();
