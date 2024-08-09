@@ -1,0 +1,7 @@
+Import('env')
+
+c_files = Glob('*.c')
+asm_c_files = env.AssemblyFile(c_files)
+
+library = env.Library('arena', asm_c_files)
+Return('library')
