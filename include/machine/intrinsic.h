@@ -1,3 +1,5 @@
+// NOLINTBEGIN(bugprone-reserved-identifier)
+
 #ifndef _MACHINE_INTRINSIC_H_
 #define _MACHINE_INTRINSIC_H_
 
@@ -18,7 +20,7 @@ __privileged __noreturn void __halt();
 __privileged void __wait();
 
 /**
-    Enabels interrupts.
+    Enables interrupts.
 */
 __privileged void __ei();
 
@@ -89,3 +91,5 @@ __privileged u16 __ldssp();
 __privileged void __stssp(u16 value);
 
 #endif /* _MACHINE_INTRINSIC_H_ */
+
+// NOLINTEND(bugprone-reserved-identifier)

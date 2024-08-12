@@ -35,7 +35,7 @@ typedef uint16_t        uint_fast16_t;
 typedef uint32_t        uint_fast32_t;
 
 
-/* 7.18.1.4 Integer types capable of hgolding object pointers */
+/* 7.18.1.4 Integer types capable of holding object pointers */
 typedef int16_t         intptr_t;
 typedef uint16_t        uintptr_t;
 
