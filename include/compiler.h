@@ -33,6 +33,11 @@
  */
 #define __asm_call      __attribute__((unused))
 
+/**
+ * Indicates that struct should not be padded.
+ */
+#define __packed        __attribute__((packed))
+
 // Definitions for Clang attributes
 
 #define __deprecated    __attribute__((deprecated))
