@@ -3,13 +3,13 @@
 
 #include <machine/types.h>
 
-/*
+/**
     Converts least sinificabt 4 bits of value
     to hex ascii representation.
 */
 char to_ascii_hex(u8 value);
 
-/*
+/**
     Writes hex ascii representation of value
     to buffer.
 */

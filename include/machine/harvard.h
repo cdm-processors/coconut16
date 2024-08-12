@@ -5,7 +5,7 @@
 
 #include <compiler.h>
 
-/*
+/**
     Copies bytes from program memory to data memory.
 
     @param dst destination address in data memory
