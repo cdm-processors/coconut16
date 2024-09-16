@@ -25,6 +25,8 @@ __asm_call void __bootloader_start_c() {
 
     dma_transfer(0x0100, 0x0000, DMA_READ | DMA_RUNNING);
 
+    mmu_map_segment(0, 30, MMU_PRESENCE | MMU_SEG_LEN(0x10), 0x0000);
+
     fill_global_ivt(panic_handler, PS_IO_HEADER | PS_CTX_NUM(0));
 
     set_global_ivt(IVT_TIMER_INTERRUPT, timer_handler, 0);
